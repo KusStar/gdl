@@ -1,6 +1,6 @@
 {
   "name": "gdl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Download any folder from GitHub Repo url",
   "main": "dist/index.js",
   "scripts": {
