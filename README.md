@@ -2,6 +2,15 @@
 
 > Download any folder from GitHub Repo url.
 
+## Usage
+
+- Just use `npx` to execute
+```cmd
+$ npx gdl https://github.com/KusStar/gdl ./gdl
+```
+
+- Or use it in your project, see [Install](#install)
+
 ## Install
 
 ```cmd
