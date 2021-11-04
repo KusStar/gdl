@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 'use strict'
-
-const meow = require('meow')
 const { downloadWithCheck } = require('../dist')
 
-const cli = meow(
-  `
+const input = process.argv.slice(2)
+
+if (input.length > 0) {
+  const [url, dir] = input
+  downloadWithCheck(url, dir)
+} else {
+  console.log(
+    `
   Usage
       $ gdl url dir [options]
 
@@ -15,12 +19,6 @@ const cli = meow(
   Examples
       $ gdl --help
       $ gdl https://github.com/KusStar/gdl ./gdl
-  `,
-)
-
-if (cli.input.length > 0) {
-  const [url, dir] = cli.input
-  downloadWithCheck(url, dir)
-} else {
-  cli.showHelp()
+  `
+  )
 }
