@@ -10,6 +10,9 @@ import got from 'got'
 import tar from 'tar'
 import { Stream } from 'stream'
 import { promisify } from 'util'
+import QuickLRU from 'quick-lru';
+
+const storageAdapter = new QuickLRU({ maxSize: 100 }) as any;
 
 const pipeline = promisify(Stream.pipeline)
 
@@ -63,11 +66,15 @@ export function hasRepo({
 
 export function downloadAndExtractRepo(
   root: string,
-  { username, name, branch, filePath }: RepoInfo
+  { username, name, branch, filePath }: RepoInfo,
+  caching = true,
 ): Promise<void> {
   return pipeline(
     got.stream(
-      `https://codeload.github.com/${username}/${name}/tar.gz/${branch}`
+      `https://codeload.github.com/${username}/${name}/tar.gz/${branch}`,
+      {
+        cache: caching ? storageAdapter : undefined,
+      }
     ),
     tar.extract(
       { cwd: root, strip: filePath ? filePath.split('/').length + 1 : 1 },
