@@ -78,7 +78,7 @@ export declare type RepoInfo = {
 export declare function isUrlOk(url: string): Promise<boolean>;
 export declare function getRepoInfo(url: URL): Promise<RepoInfo | undefined>;
 export declare function hasRepo({ username, name, branch, filePath, }: RepoInfo): Promise<boolean>;
-export declare function downloadAndExtractRepo(root: string, { username, name, branch, filePath }: RepoInfo): Promise<void>;
+export declare function downloadAndExtractRepo(root: string, { username, name, branch, filePath }: RepoInfo, caching?: boolean): Promise<void>;
 ```
 
 ## Thanks
