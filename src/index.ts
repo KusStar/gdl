@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { downloadAndExtractRepo, getRepoInfo } from './github'
-
+import ora from 'ora';
 /**
  * Directly download any valid GitHub tree url.
  * Example: https://github.com/KusStar/gdl/tree/master/{...}
@@ -47,8 +47,9 @@ export async function downloadWithCheck(
     await notExistsCallback(targetDir)
   }
   try {
+    const spinner = ora(`GDL -> downloading ${url} to ${targetDir}`).start();
     await download(url, targetDir)
-    console.log(`> GDL -> downloaded ${url} to ${targetDir}`)
+    spinner.succeed()
   } catch (e) {
     console.error(e)
   }
