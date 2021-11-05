@@ -1,6 +1,9 @@
 import fs from 'fs'
 import { downloadAndExtractRepo, getRepoInfo } from './github'
 import ora from 'ora';
+
+const tag = (...args: string[]) => `> gdl: ${args.join(' ')}`
+
 /**
  * Directly download any valid GitHub tree url.
  * Example: https://github.com/KusStar/gdl/tree/master/{...}
@@ -35,9 +38,9 @@ export async function downloadWithCheck(
   targetDir = './',
   ifExistsCallback: Callback = (dir) => {
     fs.rmSync(dir, { recursive: true, force: true })
-    console.log(`> GDL -> removed ${dir}`)
+    console.log(tag(`removed ${dir}`))
     fs.mkdirSync(dir)
-    console.log(`> GDL -> mkdir ${dir}`)
+    console.log(tag(`mkdir ${dir}`))
   },
   notExistsCallback: Callback = (dir) => fs.mkdirSync(dir)
 ) {
@@ -47,7 +50,7 @@ export async function downloadWithCheck(
     await notExistsCallback(targetDir)
   }
   try {
-    const spinner = ora(`GDL -> downloading ${url} to ${targetDir}`).start();
+    const spinner = ora(`gdl: downloading ${url} to ${targetDir}`).start();
     await download(url, targetDir)
     spinner.succeed()
   } catch (e) {
