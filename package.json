@@ -10,8 +10,7 @@
     "start": "ncc build ./src/index.ts -w -o dist/",
     "prebuild": "rimraf ./dist/",
     "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
-    "postbuild": "npm run replace:interfaces",
-    "prepub": "npm run build",
+    "prepub": "npm run build && npm run replace:interfaces",
     "pub": "release-it",
     "replace:interfaces": "ts-node scripts/replace_interfaces"
   },
