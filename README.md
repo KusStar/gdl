@@ -33,10 +33,9 @@ downloadWithCheck('https://github.com/KusStar/gdl', './gdl')
 ```
 
 ## Interfaces
-
+  
 ```ts
-// ./dist/index.d.ts
-
+// index.d.ts
 /**
  * Directly download any valid GitHub tree url.
  * Example: https://github.com/KusStar/gdl/tree/master/{...}
@@ -47,7 +46,7 @@ export declare function download(url: string, targetDir?: string): Promise<void>
 export declare type Callback = (dir: string) => void | Promise<void>;
 /**
  * The same as download above, but with two checking callbacks.
- * Will check targetDir is exists,
+ * Will check if targetDir is exists,
  * if exists and not empty, will try to call existsCallback,
  *  defaults to remove targetDir and mkdir targetDir.
  * if not exists, will try to call notExistsCallback,
@@ -55,14 +54,14 @@ export declare type Callback = (dir: string) => void | Promise<void>;
  * @param url
  * @param targetDir
  * @param ifExistsCallback
+ * @param ifNotExistsCallback
  */
 export declare function downloadWithCheck(url: string, targetDir?: string, ifExistsCallback?: Callback, notExistsCallback?: Callback): Promise<void>;
 export * from './github';
 ```
 
 ```ts
-// ./dist/github.d.ts
-
+// github.d.ts
 /**
  * basically from next.js/packages/create-next-app/helpers/examples
  * The MIT License (MIT), Copyright (c), 2021 Vercel Inc.
