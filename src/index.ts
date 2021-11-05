@@ -49,11 +49,13 @@ export async function downloadWithCheck(
   } else {
     await notExistsCallback(targetDir)
   }
+  const spinner = ora(`gdl: downloading ${url} to ${targetDir}`);
   try {
-    const spinner = ora(`gdl: downloading ${url} to ${targetDir}`).start();
+    spinner.start()
     await download(url, targetDir)
     spinner.succeed()
   } catch (e) {
+    spinner.fail()
     console.error(e)
   }
 }
