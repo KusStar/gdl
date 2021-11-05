@@ -8,5 +8,5 @@
     "skipLibCheck": false,
     "declaration": true
   },
-  "exclude": ["outdir"]
+  "exclude": ["outdir", "scripts"]
 }
