@@ -80,8 +80,26 @@ export declare type RepoInfo = {
 };
 export declare function isUrlOk(url: string): Promise<boolean>;
 export declare function getRepoInfo(url: URL): Promise<RepoInfo | undefined>;
-export declare function hasRepo({ username, name, branch, filePath, }: RepoInfo): Promise<boolean>;
+export declare function hasRepo({ username, name, branch, filePath }: RepoInfo): Promise<boolean>;
 export declare function downloadAndExtractRepo(root: string, { username, name, branch, filePath }: RepoInfo, caching?: boolean): Promise<void>;
+export interface Links {
+    self: string;
+    git: string;
+    html: string;
+}
+export interface ContentItem {
+    name: string;
+    path: string;
+    sha: string;
+    size: number;
+    url: string;
+    html_url: string;
+    git_url: string;
+    download_url?: any;
+    type: string;
+    _links: Links;
+}
+export declare function getRepoContents(url: string): Promise<ContentItem[]>;
 ```
 
 ## Thanks
