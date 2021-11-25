@@ -14,7 +14,8 @@
     "pub": "release-it",
     "replace:interfaces": "ts-node scripts/replace_interfaces",
     "lint": "eslint ./src",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest"
   },
   "keywords": [
     "GitHub",
@@ -27,13 +28,18 @@
   "devDependencies": {
     "@kuss/eslint-config-vanilla": "^2.4.0",
     "@release-it/conventional-changelog": "^3.3.0",
+    "@swc/core": "^1.2.112",
+    "@swc/jest": "^0.2.9",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "@types/tar": "^6.1.1",
     "@vercel/ncc": "^0.31.1",
     "eslint": "^8.3.0",
     "got": "^11.8.2",
+    "jest": "^27.3.1",
     "ora": "^6.0.1",
     "quick-lru": "^6.0.1",
+    "regenerator-runtime": "^0.13.9",
     "release-it": "^14.11.6",
     "rimraf": "^3.0.2",
     "tar": "^6.1.11",
@@ -42,7 +48,8 @@
   "files": [
     "dist",
     "bin",
-    "!scripts"
+    "!scripts",
+    "!tests"
   ],
   "eslintConfig": {
     "extends": [
