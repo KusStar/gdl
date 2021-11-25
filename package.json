@@ -70,7 +70,16 @@
     },
     "plugins": {
       "@release-it/conventional-changelog": {
-        "preset": "angular"
+        "infile": "CHANGELOG.md",
+        "parserOpts": {
+          "headerPattern": "^(:\\w+:\\s+)?(\\w*)(?:\\(([\\w\\$\\.\\-\\* ]*)\\))?\\: (.*)$",
+          "headerCorrespondence": [
+            "gitmoji",
+            "type",
+            "scope",
+            "subject"
+          ]
+        }
       }
     }
   }
