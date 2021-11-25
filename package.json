@@ -12,7 +12,9 @@
     "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
     "prepub": "npm run build && npm run replace:interfaces",
     "pub": "release-it",
-    "replace:interfaces": "ts-node scripts/replace_interfaces"
+    "replace:interfaces": "ts-node scripts/replace_interfaces",
+    "lint": "eslint ./src",
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [
     "GitHub",
