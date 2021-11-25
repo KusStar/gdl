@@ -1,18 +1,18 @@
 /**
  * basically from next.js/packages/create-next-app/helpers/examples
  * The MIT License (MIT), Copyright (c), 2021 Vercel Inc.
- * 
+ *
  * Modified by KusStar
  * @reference https://github.com/vercel/next.js/blob/e8e4210f9fe416534c36ceb9d3ad82dd02906cc6/packages/create-next-app/helpers/examples.ts
  */
 
 import got from 'got'
-import tar from 'tar'
+import QuickLRU from 'quick-lru'
 import { Stream } from 'stream'
+import tar from 'tar'
 import { promisify } from 'util'
-import QuickLRU from 'quick-lru';
 
-const storageAdapter = new QuickLRU({ maxSize: 100 }) as any;
+const storageAdapter = new QuickLRU({ maxSize: 100 }) as any
 
 const pipeline = promisify(Stream.pipeline)
 
@@ -29,7 +29,7 @@ export async function isUrlOk(url: string): Promise<boolean> {
 }
 
 export async function getRepoInfo(
-  url: URL,
+  url: URL
 ): Promise<RepoInfo | undefined> {
   const [, username, name, t, branch, ...file] = url.pathname.split('/')
   const filePath = file.join('/')
@@ -44,7 +44,7 @@ export async function getRepoInfo(
       return
     }
     const info = JSON.parse(infoResponse.body)
-    return { username, name, branch: info['default_branch'], filePath }
+    return { username, name, branch: info.default_branch, filePath }
   }
 
   if (username && name && branch && (t === 'tree')) {
@@ -56,7 +56,7 @@ export function hasRepo({
   username,
   name,
   branch,
-  filePath,
+  filePath
 }: RepoInfo): Promise<boolean> {
   const contentsUrl = `https://api.github.com/repos/${username}/${name}/contents`
   const packagePath = `${filePath ? `/${filePath}` : ''}/package.json`
@@ -67,13 +67,13 @@ export function hasRepo({
 export function downloadAndExtractRepo(
   root: string,
   { username, name, branch, filePath }: RepoInfo,
-  caching = true,
+  caching = true
 ): Promise<void> {
   return pipeline(
     got.stream(
       `https://codeload.github.com/${username}/${name}/tar.gz/${branch}`,
       {
-        cache: caching ? storageAdapter : undefined,
+        cache: caching ? storageAdapter : undefined
       }
     ),
     tar.extract(
