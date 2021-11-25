@@ -5,27 +5,30 @@
 ## Usage
 
 - Just use `npx` to execute
-```cmd
-$ npx gdl https://github.com/KusStar/gdl ./gdl
+
+```sh
+npx gdl https://github.com/KusStar/gdl ./gdl
 ```
 
 - Or use it in your project, see [Install](#install)
 
 ## Install
 
-```cmd
+```sh
 npm i gdl
 # or yarn add gdl
 ```
 
-**Commonjs**
+### Commonjs
+
 ```js
 const { download, downloadWithCheck } = require('gdl')
 
 downloadWithCheck('https://github.com/KusStar/gkd', './gdl')
 ```
 
-**ES6**
+### ES6
+
 ```js
 import { download, downloadWithCheck } from 'gdl'
 
