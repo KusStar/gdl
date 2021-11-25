@@ -82,3 +82,40 @@ export function downloadAndExtractRepo(
     )
   )
 }
+
+export interface Links {
+  self: string;
+  git: string;
+  html: string;
+}
+export interface ContentItem {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  url: string;
+  html_url: string;
+  git_url: string;
+  download_url?: any;
+  type: string;
+  _links: Links;
+}
+
+export async function getRepoContents(url: string) {
+  const info = await getRepoInfo(new URL(url))
+  if (info) {
+    const { username, name, filePath } = info
+    const res: ContentItem[] = await got
+      .get(`https://api.github.com/repos/${username}/${name}/contents/${filePath}`,
+        {
+          searchParams: {
+            ref: info.branch
+          }
+        }
+      )
+      .json()
+    return res
+  } else {
+    return []
+  }
+}
