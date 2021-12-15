@@ -1,3 +1,9 @@
+## 1.5.0 (2021-12-15)
+
+* :bug: fix: release-it invalid version ([3ab7acb](https://github.com/KusStar/gdl/commit/3ab7acb))
+* :arrow_down: chore: downgrade ora to 5.4.1 ([0fdd687](https://github.com/KusStar/gdl/commit/0fdd687))
+* :wrench: config: target to es2015 ([45f51fb](https://github.com/KusStar/gdl/commit/45f51fb))
+
 ## <small>1.4.2 (2021-11-25)</small>
 
 * :wrench: chore: config conventional-changelog -> parserOpts for gitmoji ([5ff7b00](https://github.com/KusStar/gdl/commit/5ff7b00))
