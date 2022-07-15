@@ -2,6 +2,8 @@
 
 > Download any folder from GitHub Repo url.
 
+[![asciicast](https://asciinema.org/a/7Ca0oKLDj5S9uhwVMOItTEcTl.svg)](https://asciinema.org/a/7Ca0oKLDj5S9uhwVMOItTEcTl)
+
 ## Usage
 
 - Just use `npx` to execute
