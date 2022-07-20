@@ -1,3 +1,8 @@
+## 1.6.0 (2022-07-20)
+
+* feat: integrate with update-notifier ([15dfe7e](https://github.com/KusStar/gdl/commit/15dfe7e))
+* Update README.md ([3bc9d13](https://github.com/KusStar/gdl/commit/3bc9d13))
+
 ## 1.5.0 (2021-12-15)
 
 * :bug: fix: release-it invalid version ([3ab7acb](https://github.com/KusStar/gdl/commit/3ab7acb))
