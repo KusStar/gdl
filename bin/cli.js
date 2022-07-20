@@ -1,6 +1,11 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict'
 const { downloadWithCheck } = require('../dist')
+const updateNotifier = require('update-notifier')
+const packageJson = require('../package.json')
+
+updateNotifier({ pkg: packageJson }).notify()
 
 const input = process.argv.slice(2)
 

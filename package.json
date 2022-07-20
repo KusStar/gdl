@@ -2,29 +2,43 @@
   "name": "gdl",
   "version": "1.5.0",
   "description": "Download any folder from GitHub Repo url",
-  "main": "dist/index.js",
-  "bin": {
-    "gdl": "./bin/cli.js"
-  },
-  "scripts": {
-    "start": "ncc build ./src/index.ts -w -o dist/",
-    "prebuild": "rimraf ./dist/",
-    "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
-    "prepub": "npm run build && npm run replace:interfaces",
-    "pub": "release-it",
-    "replace:interfaces": "ts-node scripts/replace_interfaces",
-    "lint": "eslint ./src",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "jest"
-  },
   "keywords": [
     "GitHub",
     "Repo",
     "Download"
   ],
   "repository": "KusStar/gdl",
-  "author": "KusStar",
   "license": "MIT",
+  "author": "KusStar",
+  "main": "dist/index.js",
+  "bin": {
+    "gdl": "./bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "!scripts",
+    "!tests"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./dist/",
+    "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
+    "lint": "eslint ./src",
+    "lint:fix": "npm run lint -- --fix",
+    "prepub": "npm run build && npm run replace:interfaces",
+    "pub": "release-it",
+    "replace:interfaces": "ts-node scripts/replace_interfaces",
+    "start": "ncc build ./src/index.ts -w -o dist/",
+    "test": "jest"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@kuss/eslint-config-vanilla"
+    ]
+  },
+  "dependencies": {
+    "update-notifier": "5.1.0"
+  },
   "devDependencies": {
     "@kuss/eslint-config-vanilla": "^2.4.0",
     "@release-it/conventional-changelog": "^3.3.0",
@@ -33,6 +47,7 @@
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "@types/tar": "^6.1.1",
+    "@types/update-notifier": "5.1.0",
     "@vercel/ncc": "^0.31.1",
     "eslint": "^8.3.0",
     "got": "^11.8.2",
@@ -45,17 +60,6 @@
     "tar": "^6.1.11",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
-  },
-  "files": [
-    "dist",
-    "bin",
-    "!scripts",
-    "!tests"
-  ],
-  "eslintConfig": {
-    "extends": [
-      "@kuss/eslint-config-vanilla"
-    ]
   },
   "release-it": {
     "git": {
