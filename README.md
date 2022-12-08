@@ -41,14 +41,53 @@ downloadWithCheck('https://github.com/KusStar/gdl', './gdl')
   
 ```ts
 // index.d.ts
+import { Options } from 'got';
+
+/**
+ * basically from next.js/packages/create-next-app/helpers/examples
+ * The MIT License (MIT), Copyright (c), 2021 Vercel Inc.
+ *
+ * Modified by KusStar
+ * @reference https://github.com/vercel/next.js/blob/e8e4210f9fe416534c36ceb9d3ad82dd02906cc6/packages/create-next-app/helpers/examples.ts
+ */
+
+declare type RepoInfo = {
+    username: string;
+    name: string;
+    branch: string;
+    filePath: string;
+};
+declare function isUrlOk(url: string): Promise<boolean>;
+declare function getRepoInfo(url: URL, gotOptions?: Options): Promise<RepoInfo | undefined>;
+declare function hasRepo({ username, name, branch, filePath }: RepoInfo): Promise<boolean>;
+declare function downloadAndExtractRepo(root: string, { username, name, branch, filePath }: RepoInfo, caching?: boolean): Promise<unknown>;
+interface Links {
+    self: string;
+    git: string;
+    html: string;
+}
+interface ContentItem {
+    name: string;
+    path: string;
+    sha: string;
+    size: number;
+    url: string;
+    html_url: string;
+    git_url: string;
+    download_url?: any;
+    type: string;
+    _links: Links;
+}
+declare function getRepoContents(url: string): Promise<ContentItem[]>;
+
 /**
  * Directly download any valid GitHub tree url.
  * Example: https://github.com/KusStar/gdl/tree/master/{...}
  * @param url
  * @param targetDir
  */
-export declare function download(url: string, targetDir?: string): Promise<void>;
-export declare type Callback = (dir: string) => void | Promise<void>;
+declare function download(url: string, targetDir?: string): Promise<unknown>;
+declare type Callback = (dir: string) => void | Promise<void>;
 /**
  * The same as download above, but with two checking callbacks.
  * Will check if targetDir is exists,
@@ -61,47 +100,9 @@ export declare type Callback = (dir: string) => void | Promise<void>;
  * @param ifExistsCallback
  * @param ifNotExistsCallback
  */
-export declare function downloadWithCheck(url: string, targetDir?: string, ifExistsCallback?: Callback, notExistsCallback?: Callback): Promise<void>;
-export * from './github';
-```
+declare function downloadWithCheck(url: string, targetDir?: string, ifExistsCallback?: Callback, notExistsCallback?: Callback): Promise<void>;
 
-```ts
-// github.d.ts
-/**
- * basically from next.js/packages/create-next-app/helpers/examples
- * The MIT License (MIT), Copyright (c), 2021 Vercel Inc.
- *
- * Modified by KusStar
- * @reference https://github.com/vercel/next.js/blob/e8e4210f9fe416534c36ceb9d3ad82dd02906cc6/packages/create-next-app/helpers/examples.ts
- */
-export declare type RepoInfo = {
-    username: string;
-    name: string;
-    branch: string;
-    filePath: string;
-};
-export declare function isUrlOk(url: string): Promise<boolean>;
-export declare function getRepoInfo(url: URL): Promise<RepoInfo | undefined>;
-export declare function hasRepo({ username, name, branch, filePath }: RepoInfo): Promise<boolean>;
-export declare function downloadAndExtractRepo(root: string, { username, name, branch, filePath }: RepoInfo, caching?: boolean): Promise<void>;
-export interface Links {
-    self: string;
-    git: string;
-    html: string;
-}
-export interface ContentItem {
-    name: string;
-    path: string;
-    sha: string;
-    size: number;
-    url: string;
-    html_url: string;
-    git_url: string;
-    download_url?: any;
-    type: string;
-    _links: Links;
-}
-export declare function getRepoContents(url: string): Promise<ContentItem[]>;
+export { Callback, ContentItem, Links, RepoInfo, download, downloadAndExtractRepo, downloadWithCheck, getRepoContents, getRepoInfo, hasRepo, isUrlOk };
 ```
 
 ## Thanks
