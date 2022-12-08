@@ -1,3 +1,7 @@
+## 1.7.0 (2022-12-08)
+
+* fix: Error [ERR_STREAM_PREMATURE_CLOSE] ([f20b8d9](https://github.com/KusStar/gdl/commit/f20b8d9))
+
 ## 1.6.0 (2022-07-20)
 
 * feat: integrate with update-notifier ([15dfe7e](https://github.com/KusStar/gdl/commit/15dfe7e))
