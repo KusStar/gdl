@@ -6,15 +6,11 @@
  * @reference https://github.com/vercel/next.js/blob/e8e4210f9fe416534c36ceb9d3ad82dd02906cc6/packages/create-next-app/helpers/examples.ts
  */
 
-import got from 'got'
+import got, { Options } from 'got'
 import QuickLRU from 'quick-lru'
-import { Stream } from 'stream'
 import tar from 'tar'
-import { promisify } from 'util'
 
 const storageAdapter = new QuickLRU({ maxSize: 100 }) as any
-
-const pipeline = promisify(Stream.pipeline)
 
 export type RepoInfo = {
   username: string
@@ -29,7 +25,8 @@ export async function isUrlOk(url: string): Promise<boolean> {
 }
 
 export async function getRepoInfo(
-  url: URL
+  url: URL,
+  gotOptions?: Options
 ): Promise<RepoInfo | undefined> {
   const [, username, name, t, branch, ...file] = url.pathname.split('/')
   const filePath = file.join('/')
@@ -38,8 +35,9 @@ export async function getRepoInfo(
   // https://github.com/:username/:my-cool-nextjs-example-repo-name.
   if (t === undefined) {
     const infoResponse = await got(
-      `https://api.github.com/repos/${username}/${name}`
-    ).catch((e) => e)
+      `https://api.github.com/repos/${username}/${name}`,
+      gotOptions
+    ) as any
     if (infoResponse.statusCode !== 200) {
       return
     }
@@ -68,19 +66,21 @@ export function downloadAndExtractRepo(
   root: string,
   { username, name, branch, filePath }: RepoInfo,
   caching = true
-): Promise<void> {
-  return pipeline(
+) {
+  return new Promise((resolve, reject) => {
     got.stream(
       `https://codeload.github.com/${username}/${name}/tar.gz/${branch}`,
       {
         cache: caching ? storageAdapter : undefined
       }
-    ),
-    tar.extract(
+    ).pipe(tar.extract(
       { cwd: root, strip: filePath ? filePath.split('/').length + 1 : 1 },
       [`${name}-${branch}${filePath ? `/${filePath}` : ''}`]
-    )
-  )
+    ))
+      .on('error', reject)
+      .on('finish', resolve)
+      .on('close', resolve)
+  })
 }
 
 export interface Links {
