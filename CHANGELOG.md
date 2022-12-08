@@ -1,3 +1,9 @@
+## 1.8.0 (2022-12-08)
+
+* chore: update scripts/replace_interfaces ([4473f19](https://github.com/KusStar/gdl/commit/4473f19))
+* update: README.md#Interfaces ([0e29e44](https://github.com/KusStar/gdl/commit/0e29e44))
+* refactor: use tsup ([bec88aa](https://github.com/KusStar/gdl/commit/bec88aa))
+
 ## 1.7.0 (2022-12-08)
 
 * fix: Error [ERR_STREAM_PREMATURE_CLOSE] ([f20b8d9](https://github.com/KusStar/gdl/commit/f20b8d9))
