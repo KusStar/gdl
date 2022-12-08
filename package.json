@@ -11,6 +11,8 @@
   "license": "MIT",
   "author": "KusStar",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "bin": {
     "gdl": "./bin/cli.js"
   },
@@ -21,14 +23,14 @@
     "!tests"
   ],
   "scripts": {
+    "start": "npm run build -- --watch",
     "prebuild": "rimraf ./dist/",
-    "build": "ncc build ./src/index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
+    "build": "tsup ./src/index.ts --dts --format esm,cjs",
     "lint": "eslint ./src",
     "lint:fix": "npm run lint -- --fix",
     "prepub": "npm run build && npm run replace:interfaces",
     "pub": "release-it",
     "replace:interfaces": "ts-node scripts/replace_interfaces",
-    "start": "ncc build ./src/index.ts -w -o dist/",
     "test": "jest"
   },
   "eslintConfig": {
@@ -48,7 +50,6 @@
     "@types/node": "^16.11.10",
     "@types/tar": "^6.1.1",
     "@types/update-notifier": "5.1.0",
-    "@vercel/ncc": "^0.31.1",
     "eslint": "^8.3.0",
     "got": "^11.8.2",
     "jest": "^27.3.1",
@@ -59,6 +60,7 @@
     "rimraf": "^3.0.2",
     "tar": "^6.1.11",
     "ts-node": "^10.4.0",
+    "tsup": "^6.5.0",
     "typescript": "^4.5.2"
   },
   "release-it": {
